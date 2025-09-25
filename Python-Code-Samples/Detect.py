@@ -7,22 +7,15 @@
 # You may need to install requests and uuid.
 # Run: pip install requests uuid
 
-import os, requests, uuid, json
+import os, requests, uuid, json, dotenv
 
-key_var_name = 'TRANSLATOR_TEXT_RESOURCE_KEY'
-if not key_var_name in os.environ:
-    raise Exception('Please set/export the environment variable: {}'.format(key_var_name))
-resource_key = os.environ[key_var_name]
+dotenv.load_dotenv()
 
-region_var_name = 'TRANSLATOR_TEXT_REGION'
-if not region_var_name in os.environ:
-    raise Exception('Please set/export the environment variable: {}'.format(region_var_name))
-region = os.environ[region_var_name]
+resource_key = os.getenv('TRANSLATOR_TEXT_RESOURCE_KEY')
 
-endpoint_var_name = 'TRANSLATOR_TEXT_ENDPOINT'
-if not endpoint_var_name in os.environ:
-    raise Exception('Please set/export the environment variable: {}'.format(endpoint_var_name))
-endpoint = os.environ[endpoint_var_name]
+region = os.getenv('TRANSLATOR_TEXT_REGION')
+
+endpoint = os.getenv('TRANSLATOR_TEXT_ENDPOINT')
 
 # If you encounter any issues with the base_url or path, make sure
 # that you are using the latest endpoint: https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-detect
@@ -38,7 +31,7 @@ headers = {
 
 # You can pass more than one object in body.
 body = [{
-    'text': 'Salve, mondo!'
+    'text': 'Une jam Arianiti?'
 }]
 request = requests.post(constructed_url, headers=headers, json=body)
 response = request.json()

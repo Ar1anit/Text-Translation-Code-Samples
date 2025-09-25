@@ -7,12 +7,11 @@
 # You may need to install requests and uuid.
 # Run: pip install requests uuid
 
-import os, requests, uuid, json
+import os, requests, uuid, json, dotenv
 
-endpoint_var_name = 'TRANSLATOR_TEXT_ENDPOINT'
-if not endpoint_var_name in os.environ:
-    raise Exception('Please set/export the environment variable: {}'.format(endpoint_var_name))
-endpoint = os.environ[endpoint_var_name]
+dotenv.load_dotenv()
+
+endpoint = os.getenv('TRANSLATOR_TEXT_ENDPOINT')
 
 # If you encounter any issues with the base_url or path, make sure
 # that you are using the latest endpoint: https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-languages
